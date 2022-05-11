@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::domain('api.mapp.com')->group(function () {
+    Route::get('/', function () {
+        return 'Hello sub';
+    });
+});
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/hello/{id?}', function ($id = 1) {
+    return 'Hello Mohamed Your id is ' . $id;
+})->where(['id' => '[0-9]+'])->name('hello.world');
+
+Route::get('/subscribe/{user}', function ($user) {
+    return $user;
+})->name('subscribe');
+
+Route::name('auth.')->prefix('auth')->group(function () {
+    Route::get('login', function () {
+        return 'Login Page';
+    })->name('login');
+
+    Route::get('signed', function () {
+        return URL::signedRoute('subscribe', ['user' => 'Mohamed']);
+    });
+
+    Route::get('signup', function () {
+        return 'Signup Page';
+    })->name('signup');
 });
