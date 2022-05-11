@@ -405,8 +405,18 @@
 </head>
 
 <body class="antialiased">
-    <a href="<?= route('auth.login') ?>">Login</a>
-    <a href="<?= route('auth.signup') ?>">Signup</a>
+    @php
+        $buttons = [
+            'Priamry',
+            'Secondary',
+            'red',
+            'last'];
+    @endphp
+    {{-- @foreach ($buttons as $btn)
+        {{ $btn }}
+        @include('components.sign-up-button' , ['text' => $btn])
+    @endforeach --}}
+    @each('components.sign-up-button', $buttons, 'text' )
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

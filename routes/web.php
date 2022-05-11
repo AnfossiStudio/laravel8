@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,16 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::domain('api.mapp.com')->group(function () {
-    Route::get('/', function () {
-        return 'Hello sub';
-    });
-});
+Route::get('/tasks', TaskController::class);
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+
+    return view('dashboard');
 });
 
 Route::get('/hello/{id?}', function ($id = 1) {
